@@ -1,0 +1,72 @@
+<html>
+	<head>
+		<title>forth idiom</title>
+		<link href="/css/home.css" rel="stylesheet"/>
+	</head>
+	<body>
+		<script src="/js/jquery-3.4.1.min.js"></script>
+		<script>
+		 var submitClick = function(){
+			 $.ajax({
+				 url:'./idiom',
+				 type:'POST',
+				 data:{
+					 'value1':$('#value1').val(),
+					 'value2':$('#value2').val(),
+					 'value3':$('#value3').val(),
+					 'value4':$('#value4').val(),
+					 'value1-arrow':$('#value1-arrow').val(),
+					 'value2-arrow':$('#value2-arrow').val(),
+					 'value3-arrow':$('#value3-arrow').val(),
+					 'value4-arrow':$('#value4-arrow').val()
+				 },
+				 dataType:"json",
+			 })
+			  .done( (data) => {
+				  $("#answer").val(data["answer"]);
+			  })
+			  .always( (data) => {
+				  console.log(data);
+			  });
+		 }
+		</script>
+		<!--
+			 value -> answer = 0
+			 value <- answer = 1
+		-->
+		<div class="main">
+			<div class="top">
+				<input name="value1" id="value1" type="text" value="凡"/>
+			</div>
+			<div class="top-2">
+				<select name="value1-arrow" id="value1-arrow">
+					<option value="0" selected>↓</option>
+					<option value="1">↑</option>
+				</select>
+			</div>
+			<div class="middle">
+				<input class="middle-text" id="value2" name="value2" type="text" value="暗"/>
+				<select name="value2-arrow" id="value2-arrow">
+					<option value="0" selected>→</option>
+					<option value="1">←</option>
+				</select>
+				<input class="middle-text" id="answer" name="answer" type="text" value="?" disabled="disabled" />
+				<select name="value3-arrow" id="value3-arrow">
+					<option value="0">←</option>
+					<option value="1" selected>→</option>
+				</select>
+				<input class="middle-text" id="value3" name="value3" type="text" value="痴"/>
+			</div>
+			<div class="bottom-2">
+				<select name="value4-arrow" id="value4-arrow">
+					<option value="0">↑</option>
+					<option value="1" selected>↓</option>
+				</select>
+			</div>
+			<div class="bottom">
+				<input name="value4" id="value4" type="text" value="行"/>
+			</div>
+			<input type="submit" value="検索" onclick="submitClick();" />
+		</div>
+	</body>
+</html>
